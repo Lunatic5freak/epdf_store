@@ -1,0 +1,281 @@
+.nav-bar{
+    height: 57px;
+    position:relative;
+    top: 0;
+    margin-bottom: 20px;
+    border-bottom: 3px solid orange;
+    z-index: 2;
+}
+.logo{
+    color: rgba(225,225,225, 1);
+    margin-left: 0px;
+    font-size: 15px;
+    font-style: italic;
+    background-image: url("download3.jfif");
+    background-repeat: repeat-x;
+    -webkit-background-clip: text;
+    animation: animate 10s linear infinite;
+}
+    @keyframes animate{
+        0%{
+            background-position: left 0px top 10px;
+        }
+        40%{
+            background-position: left 10px top 10px;
+        }
+    }
+.form-control{
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 30px !important;
+    border: 1px solid orange !important;
+    border-top-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    box-shadow: none !important;
+}
+.input-group-text{
+    background: orange;
+    border: 1px solid orange;
+    margin: 8px 10px 8px 0;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+
+}
+.search{
+    width: 50%;
+    display: inline-flex;
+    margin-left: 2%;
+} 
+.fa-search{
+    color: white;
+}
+.bar-menu{
+    width: 30%;
+    height: 57px;
+    float: right;
+}
+.bar-menu ul{
+    display: inline-flex;
+    float: right;   
+}
+.bar-menu ul li{
+    border-left: 1px solid white;
+    list-style-type: none;
+    padding: 15px 35px;
+    text-align: center;
+    background-color: orange;
+    cursor: pointer;
+}
+.bar-menu ul li a{
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+}
+@media (max-width:980px){
+    .nav-bar{
+        height: 118px;
+        border-bottom: 0;
+    }
+    .logo{
+        margin-left: 17px;
+        font-size: 20px;
+        margin-top: 15px;
+        margin-right: 0;
+        padding: 0;
+    }
+    .search{
+        width: 100% !important;
+    }
+    .bar-menu{
+        width: 100% !important;
+    }
+    .bar-menu ul {
+        margin: 10px 0 !important;
+        width: 100% !important;
+    }
+    .bar-menu ul li{
+        height: 57px !important;
+        width: 100% !important;
+        margin-left: 0;
+        margin-right: 30px;
+    }
+
+}
+.sidebar1{
+    height: 50%;
+    width: 14%;
+    font-size: 14px;
+    float: left;
+    z-index: 2;
+    background-color: rgba(red, green, blue, 0.8);
+}
+.sidebar1 ul{
+    margin-left: 10px;
+}
+.sidebar1 ul li{
+    list-style-type: none;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.sidebar1 ul li a:hover{
+    color: orange;
+    text-decoration: none;
+}
+.cls{
+    font-size: 35px;
+    display: none;
+    cursor: pointer;
+}
+@media (max-width:980px){
+    .sidebar1{
+        width:33%;
+        z-index: 20;
+        top: 80px;
+        position: fixed;
+        font-size: 15px;
+        display: none;
+        background-color: black;
+    }
+    .cls{
+        display: inline;
+    }
+}
+.slider{
+    width: 84%;
+    margin-left: 16%;
+    padding: 0 10px; 
+}
+@media (max-width:980px){
+    .slider{
+        width: 100% !important;
+        margin-left: 0%;
+    }
+    
+}
+.title-box{
+    background-color: orange;
+    color: #ffffff;
+    width: 180px;
+    padding: 4px 10px;
+    height: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    border-bottom: 1px solid;
+}
+.title-box h3{
+    font-size: 24px;
+}
+.title-box::after{
+    content: '';
+    border-top: 40px solid orange;
+    border-right: 50px solid transparent;
+    position: absolute;
+    display: flex;
+    margin-top: -4px;
+    margin-left: 170px;
+}
+.bridal img{
+    width: 300px;
+    height: 400px;
+}
+.featured img{
+    width: 300px;
+    height: 300px;
+    margin-left: 59px;
+}
+@media (max-width:980px){
+    .featured img{
+        width: 300px;
+        height: 250px;
+        margin-left: 10px;
+        padding: 20px;
+        padding-top: 0;
+    }
+}
+.bridal img{
+    width: 300px;
+    height: 300px;
+    margin-left: 59px;
+    margin-top: 35px;
+
+}
+@media (max-width:980px){
+    .bridal img{
+        width: 300px;
+        height: 600px;
+        margin-left: 25px;
+        margin-top: 20px;
+        padding-top: 0 ;
+    }
+}
+#off{
+    color: aqua;
+    text-transform: capitalize;
+    animation: dance 5s ease-in-out infinite alternate;
+}
+    @keyframes dance{
+        from{
+            color: #fff;
+            text-shadow: 0 0 10px #00fff2, 0 0 20px #00fff2, 0 0 30px #00fff2, 0 0 40px #00fff2, 0 0 50px #00fff2, 0 0 60px #00fff2, 0 0 70px #00fff2, 0 0 90px #00fff2;
+        }
+        to{
+            color: gray;
+            text-shadow: 0 0 20px #00fff2, 0 0 30px #00fff2, 0 0 40px #00fff2, 0 0 50px #00fff2, 0 0 60px #00fff2, 0 0 70px #00fff2, 0 0 80px #00fff2, 0 1 90px #00fff2;
+        }
+    }
+.address{
+    font-weight: bold;
+    font-style: italic;
+    font-size: large;
+    text-transform: capitalize;
+}
+.footer{
+    background-color: rgba(0, 0, 0, 0.55);
+}
+.row h5{
+    color: #00fff2;
+    margin-left: 10px ;
+    font-size: 30px;
+}
+.lg{
+    margin-left: 100px;
+    padding: 10px;
+}
+.row ul{
+    margin-left: 300px;
+    color: #00fff2;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight: bold;
+    font-size: 15px;
+    justify-content: center;
+    margin-top: 15px;
+}
+#copyright{
+    margin-left: 600px;
+}
+
+@media (max-width:980px){
+    .lg{
+        margin-left: 10px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .row ul{
+        margin-left: 220px;
+        display: block-flex;
+        margin-top: -200px;
+    }
+    #copyright{
+        margin-left: 130px;
+    }
+}
+

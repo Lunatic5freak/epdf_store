@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<title>Update Book</title>
+</head>
+<body>
+	<div>
+		<form th:action="@{/updateBook/{theid}(theid=${thebook.id})}" th:object="${thebook}" method="post">
+			<input type="hidden" th:field="${thebook.id}" id="id" >
+			<input type="text" th:field="*{name}" id="name" placeholder="name">
+			<input type="text" th:field="*{author}" id="author" placeholder="author"> 
+				<input type="text" th:field="*{type}" id="type" placeholder="type"> 
+				<input type="text" th:field="*{status}" id="status" placeholder="status">
+				 <input type="submit" value="update">
+		</form>
+	</div>
+</body>
+</html>

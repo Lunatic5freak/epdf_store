@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	
+	<style>
+	
+	#add{
+	background-color:rgba(0,0,0,0.5);
+	font-family:san-serif;
+	width:25%;
+	height:25%;
+	margin-top:10px;
+	}
+	
+	</style>
+	
+<title>ADD BOOK</title>
+</head>
+<body style="background-color:#11afaf">
+	<h3 style="text-align:center">Add Book</h3>
+	<div class="container" id="add">
+		<form th:action="@{/addBook}" method="post" encType="multipart/form-data">
+			<input type="text" th:field="${thebook.name}" id="name" placeholder="name" class="form-control" style="margin-top:5px;">
+			<input type="text" th:field="${thebook.author}" id="author"
+				placeholder="author" class="form-control" style="margin-top:5px;"> 
+				<input type="text" th:field="${thebook.type}" id="type" placeholder="type" class="form-control" style="margin-top:5px;"> 
+				<input type="text"th:field="${thebook.status}" id="status" placeholder="status" class="form-control" style="margin-top:5px;">
+				<input type="text" th:field="${thebook.price}" id="price" placeholder="price" class="form-control" style="margin-top: 5px;">
+				<input type="file" name="files" placeholder="file" class="form-control" style="margin-top: 5px;">
+				<input type="file" name="img" placeholder="Image" class="form-control" style="margin-top: 5px;">
+				<input type="submit" value="add" class="btn btn-primary" style="margin-bottom:5px; margin-top:5px;">
+				<input type="button" class="btn btn-primary" onclick="javascript:history.go(-1)" value="Back" style="margin-bottom:5px;margin-top:5px">
+		</form>
+	</div>
+</body>
+</html>

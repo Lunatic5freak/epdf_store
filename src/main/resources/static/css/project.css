@@ -1,0 +1,11 @@
+.request{
+    display: block;
+    margin-top: 50px;
+    border: 1px solid black;
+    max-width: 55%;
+    margin-left: 208px;
+    justify-content: space-between;
+}
+input[type="text"],input[type="file"],textarea,select,input[type="submit"]{
+    margin-top: 10px;
+}

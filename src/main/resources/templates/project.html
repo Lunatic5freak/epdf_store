@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+  <head>
+    <title>Navigation Bar like Apple.com</title>
+    <link rel="stylesheet" type="text/css" href="/css/project.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="C:\Users\Lenovo\Downloads\Library_demo\src\main\resources\static\css\project.css"
+    />
+
+    <!-- Optional theme -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap-theme.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div>
+      <h1
+        style="
+          text-align: center;
+          margin: 0 0 75px 0;
+          color: lime;
+          text-shadow: 0 5px 5px red;
+          font-size: 50px;
+        "
+      >
+        Welcome To PDF Store
+      </h1>
+    </div>
+    <div class="container">
+      <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+        <a href="" class="navbar-brand">
+          <img th:src="@{/img/download (11).jpeg}" style="max-width: 50px" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link"
+                ><i class="fa fa-home" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle btn btn-primary"
+                data-toggle="dropdown"
+                >Options</a
+              >
+              <div class="dropdown-menu">
+                <div sec:authorize="hasAuthority('ADMIN')">
+                  <a th:href="@{/addnewBook}" class="dropdown-item">Add Book</a>
+                  <a th:href="@{/addUsers}" class="dropdown-item">Add user</a>
+                  <a onclick="show1()" class="dropdown-item"
+                    >Show Requested Book</a
+                  >
+                  <a onclick="show()" class="dropdown-item">Show Issued Book</a>
+                  <a th:href="@{/issueBook}" class="dropdown-item"
+                    >Issue Book</a
+                  >
+                </div>
+                <div sec:authorize="hasAuthority('EMPLOYEE')">
+                  <a th:href="@{/requestBook}" class="dropdown-item"
+                    >Request Book</a
+                  >
+                  <a
+                    th:href="@{/report/{bookname}(${#authentication.getPrincipal().getUsername()})}"
+                    class="dropdown-item"
+                    >Show Book Report</a
+                  >
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <div sec:authorize="hasAuthority('ADMIN')">
+                <a onclick="log()" class="nav-link"
+                  ><i class="fa fa-shopping-cart" aria-hidden="true"
+                    >Show Cart</i
+                  ></a
+                >
+              </div>
+            </li>
+            <li class="nav-item">
+              <form th:action="@{/logout}" class="form-inline" method="post">
+                <input
+                  class="form-control mr-sm-2 justify-content-center btn btn-primary"
+                  type="submit"
+                  value="logout"
+                />
+              </form>
+            </li>
+            <li class="nav-item">
+              <form
+                th:action="@{/}"
+                method="get"
+                class="form-inline"
+                style="display: flex"
+              >
+                <input
+                  class="form-control mr-sm-2 justify-content-center"
+                  type="text"
+                  placeholder="search"
+                  name="keyword"
+                />
+                <input
+                  class="form-control mr-sm2"
+                  type="submit"
+                  value="search"
+                />
+              </form>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <table class="table table-striped">
+        <thead class="thead-dark bg-dark">
+          <tr style="color: lawngreen">
+            <td>Name</td>
+            <td>Language-Used</td>
+            <td>Descriptions</td>
+            <td>Github Link</td>
+            <td><div sec:authorize="hasAuthority('ADMIN')">Download</div></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each=" project: ${projects}">
+            <td th:text="${project.pname}"></td>
+            <td th:text="${project.lan}"></td>
+            <td th:text="${project.description}"></td>
+            <td th:text="${project.link}"></td>
+            <td>
+              <div sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/projectdownload/{projectid}(projectid=${project.id})}">download</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <section class="help">
+      <div class="request">
+        <div class="container">
+          <h1>Request a Project</h1>
+          <form
+            th:action="@{/saveProject}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <input
+              type="text"
+              name="userid"
+              id="userid"
+			  placeholder="enter ur userid"
+			  class="form-control"
+            />
+            <input
+              type="text"
+              name="name"
+              id="name"
+			  placeholder="enter your project name"
+			  class="form-control"
+            />
+            <textarea
+              rows="10"
+              cols="100"
+              name="description"
+			  placeholder="Enter project Description"
+			  class="form-control"
+            ></textarea>
+            <select name="lan" id="lan">
+              <option value="select">Select</option>
+              <option value="java">Java</option>
+              <option value="c++">C++</option>
+              <option value="python">Python</option>
+              <option value="c">C</option>
+            </select>
+            <input
+              type="file"
+              name="file"
+			  placeholder="project file(optional)"
+			  class="form-control"
+            />
+			<input type="submit" value="Request" 
+					class="btn btn-primary"
+			/>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

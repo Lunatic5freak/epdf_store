@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+<style>
+#body {
+	background-color: #07afaa;
+}
+
+a {
+	color: black;
+}
+
+#reqform {
+	margin-top: 20px;
+	left: 50%;
+	top: 50%;
+	background-color: rgba(0, 0, 0, 0.5);
+	max-width: 25%;
+	height: 200px;
+}
+
+.bookname1, .userid1 {
+	margin-top: 5px;
+}
+</style>
+
+<title>HOME</title>
+</head>
+
+<body id="body">
+	<div>
+		<h1
+			style="text-align: center; margin: 0 0 75px 0; color: lime; text-shadow: 0 5px 5px red; font-size: 50px;">Welcome
+			To PDF Store</h1>
+	</div>
+	<div class="container">
+		<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+			<a href="" class="navbar-brand"> <img
+				th:src="@{/img/download (11).jpeg}" style="max-width: 50px;">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="navbar navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a href="/" class="nav-link"><i
+							class="fa fa-home" aria-hidden="true"></i></a></li>
+					<li class="nav-item dropdown"><a href="#"
+						class="nav-link dropdown-toggle btn btn-primary"
+						data-toggle="dropdown">Options</a>
+						<div class="dropdown-menu">
+							<div sec:authorize="hasAuthority('ADMIN')">
+								<a th:href="@{/addnewBook}" class="dropdown-item">Add Book</a> <a
+									th:href="@{/addUsers}" class="dropdown-item">Add user</a> <a
+									onclick="show1()" class="dropdown-item">Show Requested Book</a>
+								<a onclick="show()" class="dropdown-item">Show Issued Book</a> <a
+									th:href="@{/issueBook}" class="dropdown-item">Issue Book</a>
+							</div>
+							<div sec:authorize="hasAuthority('EMPLOYEE')">
+								<a th:href="@{/requestBook}" class="dropdown-item">Request
+									Book</a> <a
+									th:href="@{/report/{bookname}(${#authentication.getPrincipal().getUsername()})}"
+									class=dropdown-item>Show Book Report</a>
+							</div>
+						</div></li>
+					<li class="nav-item"><div sec:authorize="hasAuthority('ADMIN')"><a onclick="log()"
+						class="nav-link"><i class="fa fa-shopping-cart"
+							aria-hidden="true">Show Cart</i></a></div></li>
+					<li class="nav-item">
+						<form th:action="@{/logout}" class="form-inline" method="post">
+							<input
+								class="form-control mr-sm-2 justify-content-center btn btn-primary"
+								type="submit" value="logout" />
+						</form> 
+					</li>
+					<li class="nav-item">
+						<div sec:authorize="hasAuthority('EMPLOYEE')">
+						<a class="nav-link" th:href="@{showProject}">Project</a></div>
+					</li>
+					<li class="nav-item">
+						<div sec:authorize="hasAuthority('EMPLOYEE')">
+						<a class="nav-link" th:href="@{showAnswers}">Answers</a></div>
+					</li>
+					
+					<li class="nav-item">
+                        <form th:action="@{/}" method="get" class="form-inline" style="display:flex;">
+                            <input class="form-control mr-sm-2 justify-content-center" type="text"
+                                placeholder="search" name="keyword" />
+                                <input class="form-control mr-sm2" type="submit" value="search"/>
+                        </form>
+                    </li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="container" id="allbook">
+		<h4>All Books</h4>
+		<table class="table table-striped">
+			<thead class="thead-dark bg-dark">
+				<tr style="color: lawngreen;">
+					<td>Name</td>
+					<td>Author</td>
+					<td>Type</td>
+					<td>Price</td>
+					<td>Status</td>
+					<td>Image</td>
+					<td>Download</td>
+					<td><div sec:authorize="hasAuthority('ADMIN')">Action</div></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" theBook: ${theBooks} ">
+					<td th:text="${theBook.name}"></td>
+					<td th:text="${theBook.author}"></td>
+					<td th:text="${theBook.type}"></td>
+					<td th:text=${theBook.price}></td>
+					<td th:text="${theBook.status}"></td>
+					<td><img alt="image" th:src="@{/showImage/{id}(id=${theBook.id})}" style="max-width:50px;"></td>
+					<td><a th:href="@{/download/{id}(id=${theBook.id})}">Download</a></td>
+					<td>
+						<div sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{/deletebyId/{theid}(theid=${theBook.id})}">Delete</a>
+							| <a th:href="@{/updateBook/{id}(id=${theBook.id})}">Update</a>
+						</div>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container" id="issuebook" style="display: none;">
+		<h4>Issued Book</h4>
+		<table class="table table-striped">
+			<thead class="thead-dark bg-dark">
+				<tr style="color: lawngreen;">
+					<td>User Id</td>
+					<td>Book Name</td>
+					<td><div sec:authorize="hasAuthority('ADMIN')">Action</div></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" theBook : ${theissuedbook}">
+					<td th:text="${theBook.bookName}"></td>
+					<td th:text="${theBook.username}"></td>
+					<td>
+						<div sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{/deletebyId/{theid}(theid=${theBook.bookName})}">Delete</a>
+							| <a th:href="@{/updateBook/{id}(id=${theBook.bookName})}">Update</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="container" id="requestedbook" style="display: none;">
+		<table class="table table-stripped">
+			<thead class="thead-dark bg-dark">
+				<tr style="color: lawngreen;">
+					<td>Book Name</td>
+					<td>User Id</td>
+					<td><div sec:authorize="hasAuthority('ADMIN')">Action</div></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" theBook: ${therequestedbook}">
+					<td th:text="${theBook.book_name}"></td>
+					<td th:text="${theBook.userid}"></td>
+					<td>
+						<div sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{/deletebyname/{name}(name=${theBook.book_name})}">Delete</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+
+	<script>
+		function show() {
+			document.getElementById("issuebook").style.display = 'block';
+			document.getElementById("allbook").style.display = 'none';
+		}
+		function show1() {
+			document.getElementById("requestedbook").style.display = 'block';
+			document.getElementById("issuebook").style.display = 'none';
+			document.getElementById("allbook").style.display = 'none';
+		}
+
+		/*  function showreq(){
+		     document.getElementById("allbook").style.display='none';
+		     document.getElementById("reqform").style.display='block';
+		 }
+
+		 function hide(){
+		     document.getElementById("allbook").style.display='block';
+		     document.getElementById("reqform").style.display='none';
+		 } */
+		/*  document.getElementById("logform").style.display="none";
+		 function log(){
+			 document.getElementById("logform").style.display="block";
+		 } */
+	</script>
+	<hr style="height: 2px; background-color: black;">
+	<footer>
+		<div style="text-align: center; margin-top: 20px">
+			<h4>Developed and Managed by:</h4>
+			<h5>L Solution Pvt. Ltd.</h5>
+			<h6>Contact Admin</h6>
+			<a href="mailto:bbcmohanty.1999@gmail.com"
+				style="font-size: 15px; color: black;"><i
+				class="fas fa-paper-plane"></i></a> <a
+				href="https://www.instagram.com/the_living_dead0" target="_blank"
+				style="font-size: 15px; color: black; margin-left: 2px;"><i
+				class="fab fa-instagram"></i></a> <a
+				href="https://www.facebook.com/Lucky" target="_blank"
+				style="font-size: 15px; color: black; margin-left: 2px;"><i
+				class="fab fa-facebook-f"></i></a>
+		</div>
+	</footer>
+
+</body>
+
+</html>
