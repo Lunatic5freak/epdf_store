@@ -13,8 +13,13 @@
     width: 25%; 
     background-color:rgba(0,0,0, 0.5); 
     background-size: cover;
-    height: 450px;
+    height: 550px;
     align-content: center;
+}
+@media(max-width:680px){
+	#content{
+		width:95%;
+	}
 }
 #user{color: white; }
 #pass{color: white;}
