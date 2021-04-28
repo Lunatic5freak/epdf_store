@@ -68,7 +68,7 @@ public class DemoController {
 	
 	Logger l=Logger.getLogger(DemoController.class.getName());
 
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String showwelcome(final Model theModel, final String keyword) {
 		List<BookDetails> theBook = null;
 		if (keyword != null) {
