@@ -72,14 +72,14 @@ public class RegistrationController {
 //			theModel.addAttribute("registration error", "User already exist");
 //			return "registration-form";
 //		}
-		String msg="Hello "+theUsers.getFname()+", Thanks For Registering With us. Now you can Download pdfs, ask for help on any project or question and you can also download available projects from our website for free of cost.";
+		// String msg="Hello "+theUsers.getFname()+", Thanks For Registering With us. Now you can Download pdfs, ask for help on any project or question and you can also download available projects from our website for free of cost.";
 		ser.saveUser(theUsers);
-		try {
-			mailService.sendMail(theUsers.getEmail(),msg);
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// try {
+		// 	mailService.sendMail(theUsers.getEmail(),msg);
+		// } catch (MessagingException e) {
+		// 	// TODO Auto-generated catch block
+		// 	e.printStackTrace();
+		// }
 		logger.info(">>success");
 		return "redirect:/login";
 	}
