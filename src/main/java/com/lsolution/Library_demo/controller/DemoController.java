@@ -67,6 +67,22 @@ public class DemoController {
 	private ProjectService prj;
 	
 	Logger l=Logger.getLogger(DemoController.class.getName());
+
+	@GetMapping("/home")
+	public String showwelcome(final Model theModel, final String keyword) {
+		List<BookDetails> theBook = null;
+		if (keyword != null) {
+			theBook = dao.findByName(keyword);
+		} else {
+			theBook = dao.findAll();
+		}
+		final List<IssuedBook> theissue = issue.findAll();
+		final List<RequestedBook> thereqBook = req.findAll();
+		theModel.addAttribute("theBooks", theBook);
+		theModel.addAttribute("theissuedbook", theissue);
+		theModel.addAttribute("therequestedbook", thereqBook);
+		return "home";
+	}
 	
 	@GetMapping("/home")
 	public String showWelcome(final Model theModel, final String keyword) {
