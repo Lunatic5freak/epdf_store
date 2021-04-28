@@ -27,6 +27,9 @@ public class Users {
 	
 	@Column(name="contact")
 	private String pnumber;
+
+	@Column(name="enabled")
+	private int enabled;
 	
 	public Users() {
 		
@@ -90,5 +93,20 @@ public class Users {
 	public void setPnumber(String pnumber) {
 		this.pnumber = pnumber;
 	}
+
+
+    /**
+     * @return int return the enabled
+     */
+    public int getEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled the enabled to set
+     */
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
 
 }

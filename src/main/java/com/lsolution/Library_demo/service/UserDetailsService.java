@@ -25,7 +25,9 @@ public class UserDetailsService implements UserDetailsServiceInterface {
 		String s=user.getPassword();
 		s= "{noop}"+s;
 		user.setPassword(s);
+		user.setEnabled(1);
 		RoleEntity roles=new RoleEntity();
+		roles.setAuthority("USER");
 		roles.setUser(user);
 		role.save(roles);
 	}

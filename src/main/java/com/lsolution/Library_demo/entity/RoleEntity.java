@@ -20,6 +20,9 @@ public class RoleEntity {
 	@Column(name="id")
 	private int id;
 
+	@Column(name="authority")
+	private String authority;
+
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="username")
 	private Users user;
@@ -45,4 +48,33 @@ public class RoleEntity {
 
 	
 	
+
+    /**
+     * @return int return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return String return the authority
+     */
+    public String getAuthority() {
+        return authority;
+    }
+
+    /**
+     * @param authority the authority to set
+     */
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
 }

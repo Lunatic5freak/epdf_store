@@ -68,7 +68,7 @@ public class DemoController {
 	
 	Logger l=Logger.getLogger(DemoController.class.getName());
 	
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String showWelcome(final Model theModel, final String keyword) {
 		List<BookDetails> theBook = null;
 		if (keyword != null) {
@@ -87,7 +87,7 @@ public class DemoController {
 	@GetMapping("/deletebyId/{theid}")
 	public String deleteById(@PathVariable final int theid, final Model theModel) {
 		dao.deleteById(theid);
-		return "redirect:/";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/addnewBook")
@@ -107,7 +107,7 @@ public class DemoController {
 		thebook.setImage(bi);
 		thebook.setFile(f);
 		dao.save(thebook);
-		return "redirect:/";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/updateBook/{theid}")
@@ -127,7 +127,7 @@ public class DemoController {
 		}
 		dao.save(thebook);
 		// theModel.addAttribute("thebook",dao.findAll());
-		return "redirect:/";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/addUsers")
@@ -140,7 +140,7 @@ public class DemoController {
 	@PostMapping("/addUsers")
 	public String saveUser(@ModelAttribute("users") final Users users, final Model theModel) {
 		role.saveUser(users);
-		return "redirect:/";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/issueBook")

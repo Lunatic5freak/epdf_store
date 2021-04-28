@@ -65,7 +65,7 @@ a {
 			</button>
 			<div class="navbar navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a href="/" class="nav-link"><i
+					<li class="nav-item"><a href="/home" class="nav-link"><i
 							class="fa fa-home" aria-hidden="true"></i></a></li>
 					<li class="nav-item dropdown"><a href="#"
 						class="nav-link dropdown-toggle btn btn-primary"
@@ -78,7 +78,7 @@ a {
 								<a onclick="show()" class="dropdown-item">Show Issued Book</a> <a
 									th:href="@{/issueBook}" class="dropdown-item">Issue Book</a>
 							</div>
-							<div sec:authorize="hasAuthority('EMPLOYEE')">
+							<div sec:authorize="hasAuthority('USER')">
 								<a th:href="@{/requestBook}" class="dropdown-item">Request
 									Book</a> <a
 									th:href="@{/report/{bookname}(${#authentication.getPrincipal().getUsername()})}"
@@ -96,12 +96,12 @@ a {
 						</form> 
 					</li>
 					<li class="nav-item">
-						<div sec:authorize="hasAuthority('EMPLOYEE')">
-						<a class="nav-link" th:href="@{showProject}">Project</a></div>
+						<div sec:authorize="hasAuthority('USER')">
+						<a class="nav-link" th:href="@{/showProject}">Project</a></div>
 					</li>
 					<li class="nav-item">
-						<div sec:authorize="hasAuthority('EMPLOYEE')">
-						<a class="nav-link" th:href="@{showAnswers}">Answers</a></div>
+						<div sec:authorize="hasAuthority('USER')">
+						<a class="nav-link" th:href="@{/showAnswers}">Answers</a></div>
 					</li>
 					
 					<li class="nav-item">
