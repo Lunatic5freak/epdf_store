@@ -122,9 +122,9 @@ a {
 				<tr style="color: lawngreen;">
 					<td>Name</td>
 					<td>Author</td>
-					<td>Type</td>
+					<!-- <td>Type</td>
 					<td>Price</td>
-					<td>Status</td>
+					<td>Status</td> -->
 					<td>Image</td>
 					<td>Download</td>
 					<td><div sec:authorize="hasAuthority('ADMIN')">Action</div></td>
@@ -134,9 +134,9 @@ a {
 				<tr th:each=" theBook: ${theBooks} ">
 					<td th:text="${theBook.name}"></td>
 					<td th:text="${theBook.author}"></td>
-					<td th:text="${theBook.type}"></td>
+					<!-- <td th:text="${theBook.type}"></td>
 					<td th:text=${theBook.price}></td>
-					<td th:text="${theBook.status}"></td>
+					<td th:text="${theBook.status}"></td> -->
 					<td><img alt="image" th:src="@{/showImage/{id}(id=${theBook.id})}" style="max-width:50px;"></td>
 					<td><a th:href="@{/download/{id}(id=${theBook.id})}">Download</a></td>
 					<td>
